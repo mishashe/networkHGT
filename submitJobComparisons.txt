@@ -1,0 +1,123 @@
+#!/bin/bash
+#BSUB -J compare         # Job name
+#BSUB -q short 
+#BSUB -o /home/projects/feariel/mishash/Development/ThreeFold/log/compare.o      # Standard output file
+#BSUB -e /home/projects/feariel/mishash/Development/ThreeFold/log/compare.e      # Standard error file
+#BSUB -n 10                 # Number of cores (adjust as needed)
+#BSUB -R "rusage[mem=30000]"  
+#BSUB -M 30000             # Memory per core (in MB)
+#BSUB -R "span[ptile=10]"
+module --ignore_cache load R
+species=("Citrobacter" "Raoultella" "Proteus" "Serratia" "Enterobacter" "Salmonella" "Klebsiella" "Escherichia")
+rTh=1000
+
+
+for (( i=0;  i < (${#species[@]}-1);  i++ )) do
+	for (( j=($i+1);  j < (${#species[@]}-0);  j++ )) do
+		if [ ! -d "/home/projects/feariel/mishash/Development/ThreeFold/data/processed/Comparisons/${species[$j]}_vs_${species[$i]}" ]; then
+			echo 1
+			Rscript /home/projects/feariel/mishash/Development/ThreeFold/src/Intersect2.R ${species[$i]} ${species[$j]} ${rTh}
+		fi
+	done
+done
+for (( i=0;  i < (${#species[@]}-2);  i++ )) do
+	for (( j=($i+1);  j < (${#species[@]}-1);  j++ )) do
+		for (( k=($j+1);  k < (${#species[@]}-0);  k++ )) do
+			if [ ! -d "/home/projects/feariel/mishash/Development/ThreeFold/data/processed/Comparisons/${species[$k]}_vs_${species[$j]}_vs_${species[$i]}" ]; then
+				echo 2
+				Rscript /home/projects/feariel/mishash/Development/ThreeFold/src/Intersect3.R ${species[$i]} ${species[$j]} ${species[$k]} 
+			fi
+		done
+	done
+done
+
+
+for (( i=0;  i < (${#species[@]}-3);  i++ )) do
+	for (( j=($i+1);  j < (${#species[@]}-2);  j++ )) do
+		for (( k=($j+1);  k < (${#species[@]}-1);  k++ )) do
+			for (( l=($k+1);  l < (${#species[@]}-0);  l++ )) do	
+				if [ ! -d "/home/projects/feariel/mishash/Development/ThreeFold/data/processed/Comparisons/${species[$l]}_vs_${species[$k]}_vs_${species[$j]}_vs_${species[$i]}" ]; then
+					Rscript /home/projects/feariel/mishash/Development/ThreeFold/src/Intersect4.R ${species[$i]} ${species[$j]} ${species[$k]} ${species[$l]}
+				fi
+			done
+		done 
+	done
+done
+
+
+for (( i=0;  i < (${#species[@]}-4);  i++ )) do
+	for (( j=($i+1);  j < (${#species[@]}-3);  j++ )) do
+		for (( k=($j+1);  k < (${#species[@]}-2);  k++ )) do
+			for (( l=($k+1);  l < (${#species[@]}1);  l++ )) do
+				for (( m=($l+1);  m < (${#species[@]}-0);  m++ )) do
+					if [ ! -d "/home/projects/feariel/mishash/Development/ThreeFold/data/processed/Comparisons/${species[$m]}_vs_${species[$l]}_vs_${species[$k]}_vs_${species[$j]}_vs_${species[$i]}" ]; then
+						Rscript /home/projects/feariel/mishash/Development/ThreeFold/src/Intersect5.R ${species[$i]} ${species[$j]} ${species[$k]} ${species[$l]} ${species[$m]} 
+					fi
+				done		
+			done
+		done 
+	done
+done
+
+
+
+
+for (( i=0;  i < (${#species[@]}-5);  i++ )) do
+	for (( j=($i+1);  j < (${#species[@]}-4);  j++ )) do
+		for (( k=($j+1);  k < (${#species[@]}-3);  k++ )) do
+			for (( l=($k+1);  l < (${#species[@]}-2);  l++ )) do
+				for (( m=($l+1);  m < (${#species[@]}-1);  m++ )) do
+					for (( p=($m+1);  p < (${#species[@]}-0);  p++ )) do
+						if [ ! -d "/home/projects/feariel/mishash/Development/ThreeFold/data/processed/Comparisons/${species[$p]}_vs_${species[$m]}_vs_${species[$l]}_vs_${species[$k]}_vs_${species[$j]}_vs_${species[$i]}" ]; then
+							Rscript /home/projects/feariel/mishash/Development/ThreeFold/src/Intersect6.R ${species[$i]} ${species[$j]} ${species[$k]} ${species[$l]} ${species[$m]} ${species[$p]} 
+						fi
+					done
+				done		
+			done
+		done 
+	done
+done
+
+
+for (( i=0;  i < (${#species[@]}-6);  i++ )) do
+	for (( j=($i+1);  j < (${#species[@]}-5);  j++ )) do
+		for (( k=($j+1);  k < (${#species[@]}-4);  k++ )) do
+			for (( l=($k+1);  l < (${#species[@]}-3);  l++ )) do
+				for (( m=($l+1);  m < (${#species[@]}-2);  m++ )) do
+					for (( p=($m+1);  p < (${#species[@]}-1);  p++ )) do
+						for (( q=($p+1);  q < (${#species[@]}-0);  q++ )) do
+							if [ ! -d "/home/projects/feariel/mishash/Development/ThreeFold/data/processed/Comparisons/${species[$q]}_vs_${species[$p]}_vs_${species[$m]}_vs_${species[$l]}_vs_${species[$k]}_vs_${species[$j]}_vs_${species[$i]}" ]; then
+								echo 6
+								Rscript /home/projects/feariel/mishash/Development/ThreeFold/src/Intersect7.R ${species[$i]} ${species[$j]} ${species[$k]} ${species[$l]} ${species[$m]} ${species[$p]} ${species[$q]} 
+							fi
+						done
+					done
+				done		
+			done
+		done 
+	done
+done
+
+for (( i=0;  i < (${#species[@]}-7);  i++ )) do
+	for (( j=($i+1);  j < (${#species[@]}-6);  j++ )) do
+		for (( k=($j+1);  k < (${#species[@]}-5);  k++ )) do
+			for (( l=($k+1);  l < (${#species[@]}-4);  l++ )) do
+				for (( m=($l+1);  m < (${#species[@]}-3);  m++ )) do
+					for (( p=($m+1);  p < (${#species[@]}-2);  p++ )) do
+						for (( q=($p+1);  q < (${#species[@]}-1);  q++ )) do
+							for (( r=($q+1);  r < (${#species[@]}-0);  r++ )) do
+								if [ ! -d "/home/projects/feariel/mishash/Development/ThreeFold/data/processed/Comparisons/${species[$r]}_vs_${species[$q]}_vs_${species[$p]}_vs_${species[$m]}_vs_${species[$l]}_vs_${species[$k]}_vs_${species[$j]}_vs_${species[$i]}" ]; then
+									echo 7
+									bsub -J Compare8 -n 1 -M 80000 -R "select[model = Intel_Skylake]" -R "rusage[mem=80000]" -R "span[ptile=1]" -q short Rscript /home/projects/feariel/mishash/Development/ThreeFold/src/Intersect8.R ${species[$i]} ${species[$j]} ${species[$k]} ${species[$l]} ${species[$m]} ${species[$p]} ${species[$q]}  ${species[$r]} 
+								fi
+							done
+						done
+					done
+				done		
+			done
+		done 
+	done
+done
+
+
+

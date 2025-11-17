@@ -1,0 +1,38 @@
+## download the genomes
+ncbi-genome-download bacteria --genera Cronobacter --assembly-level complete --section refseq --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Cronobacter.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Cronobacter/
+ncbi-genome-download bacteria --genera Escherichia --assembly-level complete  --section refseq  --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Escherichia.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Escherichia/
+ncbi-genome-download bacteria --genera Klebsiella --assembly-level complete  --section refseq  --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Klebsiella.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Klebsiella/
+ncbi-genome-download bacteria --genera Enterobacter --assembly-level complete  --section refseq  --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Enterobacter.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Enterobacter/
+ncbi-genome-download bacteria --genera Serratia --assembly-level complete  --section refseq  --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Serratia.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Serratia/
+ncbi-genome-download bacteria --genera Salmonella --assembly-level complete  --section refseq  --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Salmonella.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Salmonella/
+ncbi-genome-download bacteria --genera Citrobacter --assembly-level complete  --section refseq  --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Citrobacter.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Citrobacter/
+ncbi-genome-download bacteria --genera Raoultella --assembly-level complete  --section refseq  --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Raoultella.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Raoultella/
+ncbi-genome-download bacteria --genera Vibrio --assembly-level complete  --section refseq  --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Vibrio.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Vibrio/
+ncbi-genome-download bacteria --genera Proteus --assembly-level complete  --section refseq  --formats fasta --flat-output -m /home/projects/feariel/mishash/Development/ThreeFold/data/external/Proteus.tsv --progress-bar -o /home/projects/feariel/mishash/Development/ThreeFold/data/external/Proteus/
+
+## to get the plasmids
+awk '/^>/{flag=1; print; next} /^n/{flag=0} !flag' Cronobacter.fna > CronobacterPlasmids.fna
+awk '/^>/{flag=1; print; next} /^n/{flag=0} !flag' Escherichia.fna > EscherichiaPlasmids.fna
+awk '/^>/{flag=1; print; next} /^n/{flag=0} !flag' Klebsiella.fna > KlebsiellaPlasmids.fna
+awk '/^>/{flag=1; print; next} /^n/{flag=0} !flag' Enterobacter.fna > EnterobacterPlasmids.fna
+awk '/^>/{flag=1; print; next} /^n/{flag=0} !flag' Serratia.fna > SerratiaPlasmids.fna
+awk '/^>/{flag=1; print; next} /^n/{flag=0} !flag' Salmonella.fna > SalmonellaPlasmids.fna
+awk '/^>/{flag=1; print; next} /^n/{flag=0} !flag' Citrobacter.fna > CitrobacterPlasmids.fna
+awk '/^>/{flag=1; print; next} /^n/{flag=0} !flag' Raoultella.fna > RaoultellaPlasmids.fna
+awk '/^>/{flag=1; print; next} /^n/{flag=0} !flag' Proteus.fna > ProteusPlasmids.fna
+awk '/^>/ {count=0; print; next} /^n/ {count++; if (count==2) next} count==0' Vibrio.fna > VibrioPlasmids.fna
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
